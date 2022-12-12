@@ -9,7 +9,7 @@ export default function Header({title}) {
     return(
     <Container>
         <Button  onPress={() => navigation.openDrawer()}>
-            <AntDesign name="menu-unfold" size={42} color='#E66C40' />
+            <AntDesign name="menu-unfold" size={35} color='#E66C40' />
         </Button>
        <Title>Meus Filmes Lista</Title>
     </Container>
