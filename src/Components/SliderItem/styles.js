@@ -5,14 +5,17 @@ padding-top: 1px;
 padding-left: 6px
 padding-bottom: 20px;
 margin-bottom: 20px;
-padding-right: 8px
-width: 130px;
+padding-right: 1px
+width: 126px;
 height: 180px; 
 
 
 
 `;
+export const Button = styled.TouchableOpacity`
 
+
+`;
 
 export const Banner= styled.Image`
 height: 177px;
@@ -23,7 +26,7 @@ border-radius: 10
 `;
 
 
-export const ContainerTitle=styled.Text`
+export const ContainerTitle=styled.View`
 padding-top: 5px;
 padding-left: 2px;
 padding-bottom: 2px;

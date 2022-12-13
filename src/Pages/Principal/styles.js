@@ -48,8 +48,8 @@ export const Body  = styled.View`
 export const Title  = styled.Text`
 color: #FF7506;
 font-size: 30px
-padding-top: 15
-padding-left: 15px;
+padding-top: 20
+padding-left: 16px;
 padding-bottom: 11px;
 
 
