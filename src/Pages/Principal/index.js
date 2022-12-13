@@ -3,13 +3,10 @@ import { ScrollView } from "react-native";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import api from "../../Services/api"
+import {getListaFilmes} from '../../utils/filmes'
 
 
-import {
-    Container, Form, Input, Button, Title,
-    Body, Banner, ButtonCard,
-    Slider
-} from "./styles";
+import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider } from "./styles";
 
 
 import Header from "../../Components/Haeder/index.js";
@@ -32,7 +29,8 @@ export default function Principal() {
                         language: 'pt-BR',
                         page: 1
                     }
-                }),
+                    
+                } ),
                 api.get('/movie/popular',{
                     params: {
                         api_key: "d241f0e37bcc6c6e110a2bcbd4069f69",
@@ -48,7 +46,16 @@ export default function Principal() {
                     }
                 })
             ])
-        console.log(popularFilmes)
+
+            const nowLista = getListaFilmes(10, nowFilmes.data.results)
+            const popularLista = getListaFilmes(5, popularFilmes.data.results)
+            const topLista = getListaFilmes(5, topFilmes.data.results)
+
+            setNowFilmes(nowLista);
+            setPopularFilmes(popularLista);
+            setTopFilmes(topLista)
+
+        //console.log(popularFilmes)
        
         }
         loadFilmes();
@@ -78,8 +85,9 @@ export default function Principal() {
                     <Slider
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
-                        data={[1, 2, 3, 4, 5]}
-                        renderItem={({ item }) => <SliderItem />}
+                        data={nowFilmes}
+                        renderItem={({ item }) => <SliderItem data={item} />}
+                        keyEstractor={ (item) => string(item.id)}
                     />
 
                     <Title>Populares</Title>
@@ -87,8 +95,9 @@ export default function Principal() {
                     <Slider
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
-                        data={[1, 2, 3, 4, 5]}
-                        renderItem={({ item }) => <SliderItem />}
+                        data={popularFilmes}
+                        renderItem={({ item }) => <SliderItem data={item} />}
+                        keyEstractor={ (item) => string(item.id)}
                     />
 
                     <Title>Mais Votados</Title>
@@ -96,8 +105,9 @@ export default function Principal() {
                     <Slider
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
-                        data={[1, 2, 3, 4, 5]}
-                        renderItem={({ item }) => <SliderItem />}
+                        data={topFilmes}
+                        renderItem={({ item }) => <SliderItem data={item} />}
+                        keyEstractor={ (item) => string(item.id)}
                     />
 
 
