@@ -32,8 +32,10 @@ align-item: center
 
 export const Banner = styled.Image`
 
-height: 270;
+height: 300px;
 width: 100%;
+border-radius: 15px;
+
 `
 
 
