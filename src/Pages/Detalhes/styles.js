@@ -1,10 +1,8 @@
 import styled from 'styled-components/native'
 
 export const Container = styled.SafeAreaView`
-
 flex: 1;
-
-
+background-color: #000000
 `;
 
 export const Header = styled.View`
@@ -22,11 +20,12 @@ padding: 0px 14px
 
 export const BotaoBanner = styled.TouchableOpacity`
 width: 47px;
-height:46px;
+height: 47px;
 backgtound-color: #5707FA;
 border-radius: 23px;
 justift-content: center;
 align-item: center
+color: #fff
 
 `
 

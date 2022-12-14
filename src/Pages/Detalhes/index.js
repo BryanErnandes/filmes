@@ -1,8 +1,8 @@
 import React from "react";
 //import {View, Text} from 'react-native'
 import { Container, Header, BotaoBanner, Banner, } from "./styles";
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -15,7 +15,7 @@ export default function Detalhes() {
         <Container>
             <Header>
                 <BotaoBanner onPress={() => navigation.navigate('Principal')}>
-                    <FontAwesome name="arrow-circle-left" size={37} color='#FF7506' />
+                    <Ionicons name="md-arrow-undo-circle-sharp" size={37} color='#000000' />
                 </BotaoBanner>
 
                 <BotaoBanner>
