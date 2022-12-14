@@ -6,7 +6,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import Principal from '../Pages/Principal';
 import Filme from '../Pages/Filme';
-import Login from '../Pages/Login'
+import Detalhes from '../Pages/Detalhes'
+//import Login from '../Pages/Login'
 
 const Drawer = createDrawerNavigator()
 const Stack = createNativeStackNavigator()
@@ -50,7 +51,7 @@ export default function Routes() {
     return(
         <Stack.Navigator>
             <Stack.Screen name='Gaveta' component={Gaveta} options={{headerShown: false}} />
-            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen name='Detalhes' component={Detalhes} options={{headerShown: false}} />
         </Stack.Navigator>
     )
 };

@@ -1,44 +1,55 @@
-import {useState, useEffect} from "react";
-import { ScrollView } from "react-native";
+import { useState, useEffect } from "react";
+import { SafeAreaView, View, ScrollView, ActivityIndicator } from "react-native";
+import { useNavigation } from '@react-navigation/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import api from "../../Services/api"
-import {getListaFilmes} from '../../utils/filmes'
+import { getListaFilmes, bannerAleatorio } from '../../utils/filmes'
 
 
-import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider } from "./styles";
+import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider, ContainerTexto, TextoBanner,} from "./styles";
+
 
 
 import Header from "../../Components/Haeder/index.js";
-import SliderItem from "../../Components/SliderItem"
+import SliderItem from "../../Components/SliderItem";
+
+
 
 export default function Principal() {
 
     const [nowFilmes, setNowFilmes] = useState([]);
     const [popularFilmes, setPopularFilmes] = useState([]);
     const [topFilmes, setTopFilmes] = useState([]);
-    
+    const [bannerFilme, setBannerFilme] = useState({})
+    const [loading, setLoading] = useState(true)
+
+    const navigation = useNavigation()
+
+
+
     useEffect(() => {
+
 
         async function loadFilmes() {
 
             const [nowFilmes, popularFilmes, topFilmes] = await Promise.all([
-                api.get('/movie/now_playing',{
+                api.get('/movie/now_playing', {
                     params: {
                         api_key: "d241f0e37bcc6c6e110a2bcbd4069f69",
                         language: 'pt-BR',
                         page: 1
                     }
-                    
-                } ),
-                api.get('/movie/popular',{
+
+                }),
+                api.get('/movie/popular', {
                     params: {
                         api_key: "d241f0e37bcc6c6e110a2bcbd4069f69",
                         language: 'pt-BR',
                         page: 1
                     }
                 }),
-                api.get('/movie/top_rated',{
+                api.get('/movie/top_rated', {
                     params: {
                         api_key: "d241f0e37bcc6c6e110a2bcbd4069f69",
                         language: 'pt-BR',
@@ -47,19 +58,37 @@ export default function Principal() {
                 })
             ])
 
+            setBannerFilme(nowFilmes.data.results[bannerAleatorio(nowFilmes.data.results)])
             const nowLista = getListaFilmes(10, nowFilmes.data.results)
             const popularLista = getListaFilmes(5, popularFilmes.data.results)
             const topLista = getListaFilmes(5, topFilmes.data.results)
+
 
             setNowFilmes(nowLista);
             setPopularFilmes(popularLista);
             setTopFilmes(topLista)
 
-        //console.log(popularFilmes)
-       
+            //console.log(popularFilmes)
+            setInterval(() => {
+                setLoading(false)
+            }, 3000)
+
         }
         loadFilmes();
-    })
+    }, [])
+
+    if (loading === true) {
+        return (
+
+            <SafeAreaView style={{ marginTop: 200 }}>
+                <View>
+                    <ActivityIndicator size={150} color="#F57500" marginTop={100} />
+
+                </View>
+            </SafeAreaView>
+        )
+    }
+
     return (
         <Container>
             <Header /*title="Meus Filmes Lista"*/ />
@@ -73,12 +102,15 @@ export default function Principal() {
                 </Form>
                 <Body>
                     <Title>Lançamentos</Title>
-                    <ButtonCard activeOpacity={0.9} onPress={() => alert('TESTE')}>
+                    <ButtonCard activeOpacity={0.9} onPress={() => navigation.navigate('Detalhes')}>
                         <Banner
                             resizeMethod="resize"
                             source={{
-                                uri: 'https://images.unsplash.com/photo-1533450718592-29d45635f0a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8anBnfGVufDB8fDB8fA%3D%3D&w=1000&q=80'
+                                uri: `https://image.tmdb.org/t/p/original/${bannerFilme.backdrop_path}`
                             }} />
+                        <ContainerTexto>
+                            <TextoBanner numberOfLines={1}>{bannerFilme.title}</TextoBanner>
+                        </ContainerTexto>
 
                     </ButtonCard>
 
@@ -87,7 +119,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={nowFilmes}
                         renderItem={({ item }) => <SliderItem data={item} />}
-                        keyEstractor={ (item) => string(item.id)}
+                        keyEstractor={(item) => string(item.id)}
                     />
 
                     <Title>Populares</Title>
@@ -97,7 +129,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={popularFilmes}
                         renderItem={({ item }) => <SliderItem data={item} />}
-                        keyEstractor={ (item) => string(item.id)}
+                        keyEstractor={(item) => string(item.id)}
                     />
 
                     <Title>Mais Votados</Title>
@@ -107,7 +139,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={topFilmes}
                         renderItem={({ item }) => <SliderItem data={item} />}
-                        keyEstractor={ (item) => string(item.id)}
+                        keyEstractor={(item) => string(item.id)}
                     />
 
 

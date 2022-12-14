@@ -59,7 +59,7 @@ export const ButtonCard = styled.TouchableOpacity`
 `;
 
 export const Banner  = styled.Image`
-height: 190px;
+height: 199px;
 width: 95%;
 border-radius: 15px;
 margin: 5px 9px 5px 9px;
@@ -70,4 +70,24 @@ border-color: #E66C407;
 export const Slider = styled.FlatList`
 height: 250px;
 padding: 7px 0px 0px 0px;
+`;
+
+export const ContainerTexto = styled.View`
+background-color:#000000
+padding-top: 10
+padding-right: 5
+padding-bottom: 10
+padding-left: 5
+position: absolute;
+top: 158
+left: 9;
+display: flex;
+justify-content: flex-end;
+border-radius: 9
+`;
+
+export const TextoBanner = styled.Text`
+color: #FF7506;
+font-size: 20;
+font-weight: bold
 `;

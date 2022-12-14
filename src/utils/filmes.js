@@ -7,3 +7,7 @@ export function getListaFilmes(size, filmes) {
     }
     return popularFilmes
 }
+
+export function bannerAleatorio(filmes) {
+    return Math.floor(Math.random() * filmes.length )
+}
