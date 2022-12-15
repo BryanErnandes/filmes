@@ -21,11 +21,10 @@ padding: 0px 14px
 export const BotaoBanner = styled.TouchableOpacity`
 width: 47px;
 height: 47px;
-backgtound-color: #5707FA;
+backgtound-color: #000000;
 border-radius: 23px;
 justift-content: center;
 align-item: center
-color: #fff
 
 `
 

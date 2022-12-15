@@ -1,13 +1,13 @@
 import React from "react";
 //import { TouchableOpacity, Text } from 'react-native';
 import { Body, Button, Banner, Title, ContainerTitle, ContainerIcon, Rate } from "./styles";
-import Foundation  from 'react-native-vector-icons/Foundation';
+//import Foundation  from 'react-native-vector-icons/Foundation';
 
 
-export default function SliderItem( {data} ) {
+export default function SliderItem( {data, navigatePagina} ) {
     return (
         <Body>
-            <Button activeOpacity={0.9} onPress={() => alert('TESTE')}>
+            <Button activeOpacity={0.9} onPress={() => navigatePagina(data)}>
             <Banner
                 resizeMode="stretch"
                 source={{
@@ -17,10 +17,10 @@ export default function SliderItem( {data} ) {
             <ContainerTitle>
                 <Title numberOfLines={1}>{data.title}</Title>
             </ContainerTitle>
-            <ContainerIcon>
+            {/*<ContainerIcon>
             <Foundation name="star" size={20} color='#FADF31' />
-            <Rate>10/10</Rate>
-            </ContainerIcon>
+            <Rate>{data.vote_average}</Rate>
+            </ContainerIcon>*/}
 
             </Button>
 

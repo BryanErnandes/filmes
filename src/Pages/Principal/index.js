@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import api from "../../Services/api"
-import { getListaFilmes, bannerAleatorio } from '../../utils/filmes'
+import { getListaFilmes, randomBanner } from '../../utils/filmes'
 
 
-import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider, ContainerTexto, TextoBanner,} from "./styles";
+import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider, ContainerTexto, TextoBanner, } from "./styles";
 
 
 
@@ -29,7 +29,7 @@ export default function Principal() {
 
 
     useEffect(() => {
-
+        let isActive = true
 
         async function loadFilmes() {
 
@@ -58,7 +58,7 @@ export default function Principal() {
                 })
             ])
 
-            setBannerFilme(nowFilmes.data.results[bannerAleatorio(nowFilmes.data.results)])
+            setBannerFilme(nowFilmes.data.results[randomBanner(nowFilmes.data.results)])
             const nowLista = getListaFilmes(10, nowFilmes.data.results)
             const popularLista = getListaFilmes(5, popularFilmes.data.results)
             const topLista = getListaFilmes(5, topFilmes.data.results)
@@ -74,8 +74,20 @@ export default function Principal() {
             }, 3000)
 
         }
-        loadFilmes();
+        if(isActive) {
+
+            loadFilmes();
+        }
+        return () => {
+            isActive = false}
+
     }, [])
+
+    function navigateDetalhesPagina(item) {
+        navigation.navigate('Detalhes', {id: item.id})
+
+        //console.log(item.id)
+    }
 
     if (loading === true) {
         return (
@@ -102,7 +114,7 @@ export default function Principal() {
                 </Form>
                 <Body>
                     <Title>Lançamentos</Title>
-                    <ButtonCard activeOpacity={0.9} onPress={() => navigation.navigate('Detalhes')}>
+                    <ButtonCard activeOpacity={0.9} onPress={() => navigateDetalhesPagina(bannerFilme)}>
                         <Banner
                             resizeMethod="resize"
                             source={{
@@ -118,7 +130,7 @@ export default function Principal() {
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
                         data={nowFilmes}
-                        renderItem={({ item }) => <SliderItem data={item} />}
+                        renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
                         keyEstractor={(item) => string(item.id)}
                     />
 
@@ -128,7 +140,7 @@ export default function Principal() {
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
                         data={popularFilmes}
-                        renderItem={({ item }) => <SliderItem data={item} />}
+                        renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
                         keyEstractor={(item) => string(item.id)}
                     />
 
@@ -138,7 +150,7 @@ export default function Principal() {
                         horizontal={true}
                         showsHorizontalScrollIndicador={false}
                         data={topFilmes}
-                        renderItem={({ item }) => <SliderItem data={item} />}
+                        renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
                         keyEstractor={(item) => string(item.id)}
                     />
 
