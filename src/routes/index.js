@@ -7,6 +7,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Principal from '../Pages/Principal';
 import Filme from '../Pages/Filme';
 import Detalhes from '../Pages/Detalhes'
+import Pesquisar from '../Pages/Pesquisar'
+import { color } from "react-native-reanimated";
 //import Login from '../Pages/Login'
 
 const Drawer = createDrawerNavigator()
@@ -52,6 +54,16 @@ export default function Routes() {
         <Stack.Navigator>
             <Stack.Screen name='Gaveta' component={Gaveta} options={{headerShown: false}} />
             <Stack.Screen name='Detalhes' component={Detalhes} options={{headerShown: false}} />
+            <Stack.Screen name='Search' component={Pesquisar} options={{
+                title:'Sua Busca',
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"
+                },
+                headerStyle: {
+                    backgroundColor: "#000000"
+                }
+            }} />
         </Stack.Navigator>
     )
 };

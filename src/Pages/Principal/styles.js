@@ -14,7 +14,7 @@ height: 70px;
 width: 100%;
 align-Items: center;
 padding: 0px 16px;
-margin-Bottom: 8px
+margin-Bottom: 8px;
 
 `;
 
@@ -23,9 +23,9 @@ export const Input = styled.TextInput`
 background-color: #E66C40;
 height: 45px;
 width: 80%;
-padding: 10px 14px
-color: "#fff"
-font-size: 16px;
+padding: 10px 14px;
+color: "#fff";
+font-size: 19px;
 border-top-left-radius: 18px;
 border-bottom-left-radius: 18px;
 
@@ -47,8 +47,8 @@ export const Body  = styled.View`
 `;
 export const Title  = styled.Text`
 color: #FF7506;
-font-size: 30px
-padding-top: 20
+font-size: 30px;
+padding-top: 20;
 padding-left: 16px;
 padding-bottom: 11px;
 
@@ -69,25 +69,25 @@ border-color: #E66C407;
 
 export const Slider = styled.FlatList`
 height: 250px;
-padding: 7px 0px 0px 0px;
+padding: 7px 4px 0px 0px;
 `;
 
 export const ContainerTexto = styled.View`
-background-color:#000000
-padding-top: 10
-padding-right: 5
-padding-bottom: 10
-padding-left: 5
+background-color:#000000;
+padding-top: 10px;
+padding-right: 5px;
+padding-bottom: 10px;
+padding-left: 5px;
 position: absolute;
-top: 158
-left: 9;
+top: 158px;
+left: 9px;
 display: flex;
 justify-content: flex-end;
-border-radius: 9
+border-top-right-radius: 18px;
 `;
 
 export const TextoBanner = styled.Text`
 color: #FF7506;
-font-size: 20;
-font-weight: bold
+font-size: 20px;
+font-weight: bold;
 `;

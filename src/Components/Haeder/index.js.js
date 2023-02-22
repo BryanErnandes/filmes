@@ -4,12 +4,12 @@ import { Container, Button , Title } from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import {useNavigation} from '@react-navigation/native'
 
-export default function Header({title}) {
+export default function Header() {
     const navigation = useNavigation()
     return(
     <Container>
         <Button onPress={() => navigation.openDrawer()}>
-            <AntDesign name="menu-unfold" size={35} color='#E66C40' />
+            <AntDesign name="menu-unfold" size={30} color='#E66C40' />
         </Button>
        <Title>Meus Filmes Lista</Title>
     </Container>

@@ -18,10 +18,11 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const Banner= styled.Image`
-height: 177px;
+height: 190px;
 width: 100%;
 padding-bottom: 9px;
-border-radius: 10
+padding-left: 19px;
+border-radius: 10px;
 
 `;
 
@@ -34,7 +35,7 @@ padding-bottom: 2px;
 `;
 export const Title=styled.Text`
 font-size: 18px;
-color: #FF7506
+color: #FF7506;
 `;
 
 export const ContainerIcon=styled.View`
@@ -46,6 +47,6 @@ padding-left: 2px;
 export const Rate=styled.Text`
 font-size: 16px;
 padding-left: 6px;
-color: #FF7506
+color: #FF7506;
 
 `

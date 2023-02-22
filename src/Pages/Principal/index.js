@@ -23,6 +23,7 @@ export default function Principal() {
     const [topFilmes, setTopFilmes] = useState([]);
     const [bannerFilme, setBannerFilme] = useState({})
     const [loading, setLoading] = useState(true)
+    const [input, setInput] = useState('')
 
     const navigation = useNavigation()
 
@@ -88,6 +89,12 @@ export default function Principal() {
 
         //console.log(item.id)
     }
+    function handleSearchMovie() {
+        if(input ==='') 
+        return;
+        navigation.navigate('Search',  {name: input})
+        setInput('');
+    }
 
     if (loading === true) {
         return (
@@ -106,9 +113,11 @@ export default function Principal() {
             <Header /*title="Meus Filmes Lista"*/ />
             <ScrollView>
                 <Form>
-                    <Input placeholder="Nome do filme"
-                        placeholderTextColor='#fff' />
-                    <Button activeOpacity={0.9}>
+                    <Input placeholder="Nome do Filme"
+                        placeholderTextColor='#fff'
+                        value={input}
+                        onChangeText={(text) => setInput(text)} />
+                    <Button onPress={ handleSearchMovie} activeOpacity={0.9}>
                         <AntDesign name="search1" size={40} color='#fff' />
                     </Button>
                 </Form>
@@ -131,7 +140,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={nowFilmes}
                         renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
-                        keyEstractor={(item) => string(item.id)}
+                        keyExtractor={(item) => String(item.id)}
                     />
 
                     <Title>Populares</Title>
@@ -141,7 +150,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={popularFilmes}
                         renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
-                        keyEstractor={(item) => string(item.id)}
+                        keyExtractor={(item) => String(item.id)}
                     />
 
                     <Title>Mais Votados</Title>
@@ -151,7 +160,7 @@ export default function Principal() {
                         showsHorizontalScrollIndicador={false}
                         data={topFilmes}
                         renderItem={({ item }) => <SliderItem data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
-                        keyEstractor={(item) => string(item.id)}
+                        keyExtractor={(item) => String(item.id)}
                     />
 
 
