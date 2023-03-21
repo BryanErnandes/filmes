@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-background-color: #FF7506;
+border-color: #000000;
+border-width: 2;
 align-items: center;
 justify-content: center;
 margin-right: 5px;
@@ -13,4 +14,5 @@ border-radius: 10px;
 export const Nome = styled.Text`
 font-size: 19px;
 font-weight: bold;
+color: #fff
 `;

@@ -6,7 +6,7 @@ background-color: #000000;
 height: 70px;
 flex-direction: row;
 align-items: center;
-padding-left: 15
+padding-left: 15px;
 margin: -4px 0px 0px 0px;
 `;
 

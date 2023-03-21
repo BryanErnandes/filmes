@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 
-import {ScrollView} from 'react-native'
-import { Container, Header, BotaoBanner, Banner, Titulo, Title, ListaGeneros, Descricao, Body, Notas, Populidade } from "./styles";
+import { ScrollView } from 'react-native'
+import { Container, Header, BotaoBanner, AssiBanner, FavBanner, Banner, Titulo, Title, ListaGeneros, Descricao, Body, Notas, Populidade } from "./styles";
 
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -12,6 +12,10 @@ import Entypo from 'react-native-vector-icons/Entypo'
 
 import api from '../../Services/api'
 import Generos from "../../Components/Generos";
+
+import { FilmeFavoritosSalvo, hasFavorito, deleteFavorito } from "../../utils/estoque"
+
+import { FilmeAssistosSalvo, hasAssistido, deleteAssistido } from "../../utils/estoqueAssistido"
 
 
 
@@ -22,6 +26,8 @@ export default function Detalhes() {
     const route = useRoute();
 
     const [filme, setFilme] = useState({});
+    const [favoritosFilme, setFavoritosFilme] = useState(false)
+    const [assistidoFilme, setAssistidoFilme] = useState(false)
 
     useEffect(() => {
 
@@ -29,6 +35,7 @@ export default function Detalhes() {
 
 
         async function loadFilmes() {
+
             const response = await api.get(`/movie/${route.params?.id}`, {
                 params: {
                     api_key: 'd241f0e37bcc6c6e110a2bcbd4069f69',
@@ -38,8 +45,17 @@ export default function Detalhes() {
                 .catch((err) => {
                     console.log(err)
                 })
+
+
             if (isActive) {
                 setFilme(response.data);
+                const isAssistido = await hasAssistido(response.data)
+                setAssistidoFilme(isAssistido)
+
+                const isFavorito = await hasFavorito(response.data)
+                setFavoritosFilme(isFavorito)
+
+                // console.log(response.data)
             }
 
         }
@@ -53,16 +69,56 @@ export default function Detalhes() {
         }
     }, [])
 
+    async function filmeAssistidos(filme) {
+        if(assistidoFilme){
+            await deleteAssistido(filme.id)
+            setAssistidoFilme(false);
+            //alert("filme deletado")
+        }else{
+            await FilmeAssistosSalvo('@assistido', filme)
+            setAssistidoFilme(true)
+            //alert("filme salvo")
+        }
+    }
+
+    async function FilmeFavoritos(filme) {
+
+        if (favoritosFilme) {
+            await deleteFavorito(filme.id);
+            setFavoritosFilme(false);
+            //alert('filme removido');
+
+        }
+        else {
+            FilmeFavoritosSalvo('@favorito', filme)
+            setFavoritosFilme(true);
+            //alert('filme salvo')
+        }
+    }
+
     return (
+
         <Container>
             <Header>
                 <BotaoBanner onPress={() => navigation.navigate('Principal')}>
                     <Entypo name="arrow-left" size={29} color='#fff' />
                 </BotaoBanner>
 
-                <BotaoBanner>
-                    <AntDesign name="heart" size={24} color='#fff' />
-                </BotaoBanner>
+                <AssiBanner activeOpacity={0.8} onPress={() => filmeAssistidos(filme)}>
+                    {assistidoFilme ? (
+                        <Entypo name="eye" size={24} color='#000000' />
+                    ) : (
+                        <Entypo name="eye-with-line" size={24} color='#000000' />
+                    )}
+                </AssiBanner>
+
+                <FavBanner activeOpacity={0.8} onPress={() => FilmeFavoritos(filme)}>
+                    {favoritosFilme ? (
+                        <AntDesign name="heart" size={24} color='#FA3800' />
+                    ) : (
+                        <AntDesign name="hearto" size={24} color='#FA3800' />
+                    )}
+                </FavBanner>
             </Header>
             <Banner
                 resizeMode='stretch'
@@ -72,7 +128,8 @@ export default function Detalhes() {
             />
 
             <Titulo>
-                <Title numberOfLines={1}>{filme.title}</Title>
+                <Title>{filme.title}</Title>
+
             </Titulo>
 
             <Body>

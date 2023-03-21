@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SafeAreaView, View, ActivityIndicator } from "react-native";
 import { Container, Buscar } from "./styles";
 import { useNavigation, useRoute } from '@react-navigation/native'
 
@@ -29,7 +30,7 @@ export default function Search() {
 
             if (isActive) {
                 setFilme(response.data.results);
-                console.log(response.data.results)
+                //console.log(response.data.results)
                 setLoading(false);
             }
 
@@ -43,14 +44,20 @@ export default function Search() {
         }
     }, [])
 
-   {/* function navigateDetalhesPagina(item){
+    function navigateDetalhesPagina(item){
         navigation.navigate('Detalhes', {id: item.id})
-    }*/}
+    }
 
 
-    if (loading) {
+    if (loading === true) {
         return (
-            <Container></Container>
+
+            <SafeAreaView style={{ marginTop: 200 }}>
+                <View>
+                    <ActivityIndicator size={150} color="#F57500" marginTop={100} />
+
+                </View>
+            </SafeAreaView>
         )
     }
 
@@ -58,10 +65,12 @@ export default function Search() {
         <Container>
             <Buscar
                 data={filme}
-                showsVerticalScrollIndicador={false}
+                showsVerticalScrollIndicator={false}
+                horizontal={false}
+                numColumns={2}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => <BuscarItem data={item} navigatePagina= {() => navigateDetalhesPagina(item)} />}
             />
         </Container>
     )
-} BuscarItem
+} 

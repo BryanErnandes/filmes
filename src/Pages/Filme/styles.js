@@ -1,7 +1,11 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.SafeAreaView`
-background-color: #0F209E
+export const Container = styled.View`
 flex:1
-padding: 4px 0px
+background-color: #0E58AE;
+`;
+
+
+export const Lista = styled.FlatList`
+margin-bottom: 10px;
 `;
