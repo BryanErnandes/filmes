@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-//import {View, Text} from 'react-native'
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 
-import { ScrollView } from 'react-native'
+import { ScrollView, ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native'
 import { Container, Header, BotaoBanner, AssiBanner, FavBanner, Banner, Titulo, Title, ListaGeneros, Descricao, Body, Notas, Populidade } from "./styles";
 
 
@@ -28,6 +27,7 @@ export default function Detalhes() {
     const [filme, setFilme] = useState({});
     const [favoritosFilme, setFavoritosFilme] = useState(false)
     const [assistidoFilme, setAssistidoFilme] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
@@ -58,6 +58,10 @@ export default function Detalhes() {
                 // console.log(response.data)
             }
 
+            setInterval(() => {
+                setLoading(false)
+            }, 3000)
+
         }
 
         if (isActive) {
@@ -70,11 +74,11 @@ export default function Detalhes() {
     }, [])
 
     async function filmeAssistidos(filme) {
-        if(assistidoFilme){
+        if (assistidoFilme) {
             await deleteAssistido(filme.id)
             setAssistidoFilme(false);
             //alert("filme deletado")
-        }else{
+        } else {
             await FilmeAssistosSalvo('@assistido', filme)
             setAssistidoFilme(true)
             //alert("filme salvo")
@@ -94,6 +98,15 @@ export default function Detalhes() {
             setFavoritosFilme(true);
             //alert('filme salvo')
         }
+    }
+
+    if (loading === true) {
+        return (
+
+            <SafeAreaView style={styles.Carregamento}>
+                <ActivityIndicator size={150} color="#F57500" />
+            </SafeAreaView>
+        )
     }
 
     return (
@@ -153,3 +166,14 @@ export default function Detalhes() {
         </Container>
     )
 }
+
+
+const styles = StyleSheet.create({
+    Carregamento: {
+      flex: 1,
+      justifyContent: "center",
+      backgroundColor: '#000000',
+    },
+
+  });
+  

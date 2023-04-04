@@ -10,7 +10,7 @@ z-index: 99;
 position: absolute;
 top: 9px;
 width: 100%;
-display: flex
+display: flex;
 flex-direction: row;
 justify-content: space-between;
 padding: 0px 14px
@@ -25,7 +25,7 @@ background: rgba(rgba(143, 132, 137, 0.5));
 border-radius: 23px;
 justift-content: center;
 align-item: center;
-padding: 2px 2px
+padding: 2px 2px;
 
 `
 
@@ -36,7 +36,7 @@ background: rgba(rgba(143, 132, 137, 0.5));
 border-radius: 23px;
 justify-content: center;
 align-item: center;
-padding: 5px 5px
+padding: 5px 5px;
 
 `
 
@@ -87,8 +87,8 @@ margin: 0px 14px 0px 14px;
 `;
 
 export const Notas = styled.Text`
-font-size: 18px
-font-weight: bold
+font-size: 18px;
+font-weight: bold;
 color: #fff;
 font-size: 20px;
 margin: 0px 2px 0px 0px;
@@ -96,8 +96,8 @@ margin: 0px 2px 0px 0px;
 `;
 
 export const Populidade = styled.Text`
-font-size: 18px
-font-weight: bold
+font-size: 18px;
+font-weight: bold;
 color: #fff;
 
 `;

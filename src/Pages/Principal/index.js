@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import { SafeAreaView, StyleSheet, ScrollView, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { useNavigation, useIsFocused } from '@react-navigation/native'
 import AppIntroSlider from "react-native-app-intro-slider";
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -9,7 +9,7 @@ import { getListaFilmes, randomBanner } from '../../utils/filmes'
 import { getFavoritosSalvos } from "../../utils/estoque";
 
 
-import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider, Carousel, ContainerTexto, TextoBanner, } from "./styles";
+import { Container, Form, Input, Button, Title, Body, Banner, ButtonCard, Slider, SliderFavoritos, ContainerTexto, TextoBanner, } from "./styles";
 
 
 
@@ -30,30 +30,9 @@ export default function Principal() {
     const [loading, setLoading] = useState(true)
     const [input, setInput] = useState('')
     const [favoritos, setFavoritos] = useState([])
+    const isFocused = useIsFocused()
 
     const navigation = useNavigation()
-
-    useEffect(() => {
-        let isActive = true
-
-        async function getFilmesFavoritos() {
-            const resultados = await getFavoritosSalvos('@favoritos');
-
-            if (isActive) {
-                setFilme(resultados);
-                //console.log(resultados)
-            }
-        }
-
-        if (isActive) {
-            getFilmesFavoritos();
-        }
-
-        return () => {
-            isActive = false
-        }
-
-    }, []);
 
 
     useEffect(() => {
@@ -61,7 +40,7 @@ export default function Principal() {
 
 
         async function loadFilmes() {
-            const resultados = await getFavoritosSalvos('@favoritos');
+            const resultados = await getFavoritosSalvos('@favorito');
 
             const [nowFilmes, popularFilmes, topFilmes] = await Promise.all([
                 api.get('/movie/now_playing', {
@@ -115,7 +94,7 @@ export default function Principal() {
             isActive = false
         }
 
-    }, [])
+    }, [isFocused])
 
     function navigateDetalhesPagina(item) {
         navigation.navigate('Detalhes', { id: item.id })
@@ -140,6 +119,7 @@ export default function Principal() {
     }
 
     return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container showsVerticalScrollIndicator={false}>
             <Header title=" Filmes DataBase" />
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -163,6 +143,16 @@ export default function Principal() {
                         renderDoneButton={() => { }}
                         data={nowFilmes}
                         renderItem={({ item }) => <FilmesCarousel data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
+                        keyExtractor={(item) => String(item.id)}
+                    />
+
+                    <Title>Favoritos</Title>
+
+                    <SliderFavoritos
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={favoritos}
+                        renderItem={({ item }) => <SliderFavorito data={item} navigatePagina={() => navigateDetalhesPagina(item)} />}
                         keyExtractor={(item) => String(item.id)}
                     />
 
@@ -203,6 +193,7 @@ export default function Principal() {
                 </Body>
             </ScrollView>
         </Container>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -214,4 +205,3 @@ const styles = StyleSheet.create({
     },
 
   });
-  
