@@ -9,7 +9,7 @@ export default function SliderItem( {data, navigatePagina} ) {
         <Body>
             <Button activeOpacity={0.9} onPress={() => navigatePagina(data)}>
             <Banner
-                resizeMode="stretch"
+                resizeMode="cover"
                 source={{
                     uri: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`
                 }} />

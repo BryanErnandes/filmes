@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, ActivityIndicator } from "react-native";
+import { SafeAreaView, View, ActivityIndicator, StyleSheet } from "react-native";
 import { Container, Buscar } from "./styles";
 import { useNavigation, useRoute } from '@react-navigation/native'
 
@@ -52,11 +52,8 @@ export default function Search() {
     if (loading === true) {
         return (
 
-            <SafeAreaView style={{ marginTop: 200 }}>
-                <View>
-                    <ActivityIndicator size={150} color="#F57500" marginTop={100} />
-
-                </View>
+            <SafeAreaView style={styles.Carregamento}>
+                <ActivityIndicator size={150} color="#F57500" />
             </SafeAreaView>
         )
     }
@@ -74,3 +71,15 @@ export default function Search() {
         </Container>
     )
 } 
+
+const styles = StyleSheet.create({
+    Carregamento: {
+      flex: 1,
+      justifyContent: "center",
+      backgroundColor: '#000000',
+    },
+
+  });
+  
+
+  //add

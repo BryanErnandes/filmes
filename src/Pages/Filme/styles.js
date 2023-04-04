@@ -9,3 +9,5 @@ background-color: #0E58AE;
 export const Lista = styled.FlatList`
 margin-bottom: 10px;
 `;
+
+//add

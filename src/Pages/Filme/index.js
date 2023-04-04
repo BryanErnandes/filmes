@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Lista } from "./styles";
+import {SafeAreaView, ActivityIndicator, StyleSheet} from 'react-native'
 import Header from "../../Components/Haeder/index.js";
 import FavoritosItem from '../../Components/filmesFavoritos'
 
@@ -7,12 +8,13 @@ import FavoritosItem from '../../Components/filmesFavoritos'
 import { getFavoritosSalvos, deleteFavorito } from '../../utils/estoque';
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 
-
+//add
 export default function Favoritos() {
 
     const isFocused = useIsFocused()
     const navigation = useNavigation()
     const [filme, setFilme] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         let isActive = true;
@@ -25,6 +27,9 @@ export default function Favoritos() {
                 //console.log(resultado);
             }
 
+            setInterval(() => {
+                setLoading(false)
+            }, 3000)
         }
 
         if (isActive) {
@@ -44,6 +49,15 @@ export default function Favoritos() {
 
     function navigateDetalhesPag(item) {
         navigation.navigate('Detalhes', { id: item.id })
+    }
+
+    if (loading === true) {
+        return (
+
+            <SafeAreaView style={styles.Carregamento}>
+                <ActivityIndicator size={150} color="#F57500" />
+            </SafeAreaView>
+        )
     }
 
     return (
@@ -68,3 +82,12 @@ export default function Favoritos() {
         </Container>
     )
 }
+
+const styles = StyleSheet.create({
+    Carregamento: {
+      flex: 1,
+      justifyContent: "center",
+      backgroundColor: '#000000',
+    },
+
+  });

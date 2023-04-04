@@ -5,8 +5,8 @@ width: 38%;
 height: 235px; 
 margin-top: 15px;
 margin-right: 30px;
-margin-left: 10
-margin-bottom: 15
+margin-left: 10px;
+margin-bottom: 15px;
 `;
 
 export const Botao =  styled.TouchableOpacity`

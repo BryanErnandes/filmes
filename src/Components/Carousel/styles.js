@@ -29,10 +29,9 @@ width: 300%;
 export const ContainerTitle=styled.View`
 z-index: 99;
 position: absolute;
-top: 123px;
+top: 91px;
 left: 6px;
 background: rgba(5, 10, 1, 0.27)
-color:#E66C40;
 border-radius: 6px;
 padding-top: 0px;
 padding-left: 5px;

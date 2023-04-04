@@ -70,6 +70,12 @@ border: 2px;
 border-color: #E66C407;
 `;
 
+export const SliderFavoritos = styled.FlatList`
+padding: 7px 0px 0px 0px;
+margin-right: 0px;
+
+`;
+
 export const Slider = styled.FlatList`
 height: 220px;
 width:  100%;
@@ -96,3 +102,5 @@ color: #fff;
 font-size: 20px;
 font-weight: bold;
 `;
+
+//add
