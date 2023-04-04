@@ -8,7 +8,7 @@ import FavoritosItem from '../../Components/filmesFavoritos'
 import { getFavoritosSalvos, deleteFavorito } from '../../utils/estoque';
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 
-
+//add
 export default function Favoritos() {
 
     const isFocused = useIsFocused()

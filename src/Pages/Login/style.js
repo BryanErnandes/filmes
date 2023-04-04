@@ -111,4 +111,4 @@ margin-left: 40px;
 export const Google = styled.View`
 `;
 
-
+//add

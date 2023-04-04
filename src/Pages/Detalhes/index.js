@@ -17,7 +17,7 @@ import { FilmeFavoritosSalvo, hasFavorito, deleteFavorito } from "../../utils/es
 import { FilmeAssistosSalvo, hasAssistido, deleteAssistido } from "../../utils/estoqueAssistido"
 
 
-
+//add
 export default function Detalhes() {
 
 

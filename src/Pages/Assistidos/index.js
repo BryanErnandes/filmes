@@ -8,7 +8,7 @@ import CompletoItem from "../../Components/FilmesAssistidos"
 import { getAssistidoSalvos, deleteAssistido } from "../../utils/estoqueAssistido";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
-
+//add
 
 export default function Completo() {
 

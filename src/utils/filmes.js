@@ -14,3 +14,5 @@ export function getListaFilmes(size, filmes) {
 export function randomBanner(filmes) {
     return Math.floor(Math.random() * filmes.length )
 }
+
+//add

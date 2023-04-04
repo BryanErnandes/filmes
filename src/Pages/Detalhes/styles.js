@@ -17,7 +17,7 @@ padding: 0px 14px
 
 
 `;
-
+//add
 export const BotaoBanner = styled.TouchableOpacity`
 width: 35px;
 height: 35px;

@@ -9,3 +9,5 @@ export const Nome = styled.Text``;
 
 export const Buscar = styled.FlatList`
 `;
+
+//add
