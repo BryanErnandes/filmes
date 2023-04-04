@@ -77,9 +77,10 @@ function Gaveta() {
                     <Entypo name={focused ? 'eye' : 'eye-with-line'} size={size} color={color} />
                 )
             }} />
-            <Drawer.Screen name="Filtro" component={Filtro} options={{
+            {/*<Drawer.Screen name="Filtro" component={Filtro} options={{
                 title: 'Filmes'
-            }} />
+            }} />*/}
+            
 
 
         </Drawer.Navigator>
